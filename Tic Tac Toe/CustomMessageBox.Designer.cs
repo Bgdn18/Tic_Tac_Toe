@@ -36,9 +36,9 @@
             // 
             button1.Dock = DockStyle.Bottom;
             button1.Font = new Font("Comic Sans MS", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button1.Location = new Point(0, 84);
+            button1.Location = new Point(0, 78);
             button1.Name = "button1";
-            button1.Size = new Size(373, 57);
+            button1.Size = new Size(373, 63);
             button1.TabIndex = 1;
             button1.Text = "Restart";
             button1.UseVisualStyleBackColor = true;

@@ -1,14 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Diagnostics;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
+using System.Windows.Forms;
 
 namespace Tic_Tac_Toe
 {
@@ -32,6 +25,7 @@ namespace Tic_Tac_Toe
             buttons.Add(button8);
             buttons.Add(button9);
 
+
             // Назначаем обработчики событий для кнопок
             foreach (var button in buttons)
             {
@@ -40,6 +34,12 @@ namespace Tic_Tac_Toe
 
             GenerateTag();
 
+            void GenerateTag()
+            {
+                var r = new Random();
+                tag = r.Next(0, 2) != 1 ? "X" : "O";
+            }
+
             lblCurrentPlayer.Text = $"Сейчас ходит: {tag}"; // Устанавливаем начальный текст для Label
 
             // Запрет изменения размера окна
@@ -47,7 +47,7 @@ namespace Tic_Tac_Toe
             this.MaximizeBox = false; // Убираем кнопку максимизации 
         }
 
-        private void MessageBox(Random rand)
+        private void MessageBox()
         {
             // Создание и отображение CustomMessageBox
             var customMessageBox = new CustomMessageBox("You Win!", "Congratulations!", MessageBoxIcon.Information);
@@ -57,11 +57,11 @@ namespace Tic_Tac_Toe
         bool CheckWin(string player)
         {
             // Проверка горизонтальных линий
-            for (int i = 0; i < 9; i += 3)
+            for (int i = 0; i < 3; i++)
             {
-                if (buttons[i].Text == player && buttons[i + 1].Text == player && buttons[i + 2].Text == player)
+                if (buttons[i * 3].Text == player && buttons[i * 3 + 1].Text == player && buttons[i * 3 + 2].Text == player)
                 {
-                    return true;
+                    return true; // Если найдена горизонтальная линия
                 }
             }
 
@@ -70,40 +70,38 @@ namespace Tic_Tac_Toe
             {
                 if (buttons[i].Text == player && buttons[i + 3].Text == player && buttons[i + 6].Text == player)
                 {
-                    return true;
+                    return true; // Если найдена вертикальная линия
                 }
             }
 
             // Проверка диагоналей
             if (buttons[0].Text == player && buttons[4].Text == player && buttons[8].Text == player)
             {
-                return true;
+                return true; // Главная диагональ
             }
             if (buttons[2].Text == player && buttons[4].Text == player && buttons[6].Text == player)
             {
-                return true;
+                return true; // Побочная диагональ
             }
-
             return false;
-        }
-
-        void GenerateTag()
-        {
-            var r = new Random();
-            tag = r.Next(0, 2) != 1 ? "X" : "O";
         }
 
         private void ButtonClick(object? sender, EventArgs e)
         {
-            Random rand = new Random();
-
             var currentButton = sender as Button;
+
+            // Проверка на то, что кнопка не была нажата ранее
+            if (currentButton.Text != "")
+            {
+                return; // Если кнопка уже заполнена, выходим из метода
+            }
+
             currentButton.Text = tag;
             currentButton.Click -= ButtonClick;
 
             if (CheckWin(tag)) // Проверяем победителя для текущего игрока
             {
-                MessageBox(rand);
+                MessageBox(); // Показываем сообщение о победе
                 foreach (Button item in buttons)
                 {
                     item.Click -= ButtonClick; // Отключаем все кнопки после победы
@@ -113,13 +111,14 @@ namespace Tic_Tac_Toe
             {
                 // Меняем игрока
                 tag = tag == "X" ? "O" : "X";
-                lblCurrentPlayer.Text = $"Player's Turn: {tag}"; // Обновляем текст Label
+                lblCurrentPlayer.Text = $"Сейчас ходит: {tag}"; // Обновляем текст Label
             }
         }
 
 
         private void btnRestart_Click(object sender, EventArgs e)
         {
+            // Перезапускаем приложение
             string exePath = Application.ExecutablePath;
             Process.Start(exePath);
             Application.Exit();

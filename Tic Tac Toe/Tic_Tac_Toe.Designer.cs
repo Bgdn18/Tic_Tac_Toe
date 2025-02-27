@@ -83,7 +83,7 @@
             // button4
             // 
             button4.Font = new Font("Comic Sans MS", 48F, FontStyle.Bold);
-            button4.Location = new Point(424, 218);
+            button4.Location = new Point(12, 218);
             button4.Name = "button4";
             button4.Size = new Size(200, 200);
             button4.TabIndex = 6;
@@ -101,7 +101,7 @@
             // button6
             // 
             button6.Font = new Font("Comic Sans MS", 48F, FontStyle.Bold);
-            button6.Location = new Point(12, 218);
+            button6.Location = new Point(424, 218);
             button6.Name = "button6";
             button6.Size = new Size(200, 200);
             button6.TabIndex = 4;
@@ -110,7 +110,7 @@
             // button7
             // 
             button7.Font = new Font("Comic Sans MS", 48F, FontStyle.Bold);
-            button7.Location = new Point(424, 424);
+            button7.Location = new Point(12, 424);
             button7.Name = "button7";
             button7.Size = new Size(200, 200);
             button7.TabIndex = 9;
@@ -128,7 +128,7 @@
             // button9
             // 
             button9.Font = new Font("Comic Sans MS", 48F, FontStyle.Bold);
-            button9.Location = new Point(12, 424);
+            button9.Location = new Point(424, 424);
             button9.Name = "button9";
             button9.Size = new Size(200, 200);
             button9.TabIndex = 7;
